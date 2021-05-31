@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="Country Name"
+            android:text="State Name"
             android:textSize="20sp"
             android:textStyle="bold"
             android:paddingLeft="15dp"

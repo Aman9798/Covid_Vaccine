@@ -49,6 +49,7 @@ public class Affected_Sates extends AppCompatActivity {
             @Override
             public void run() {
                 //in background
+                stateModelsList.clear();
                 stateModelsList = QueryUtils.fetchStateCasesData(USGS_REQUEST_URL);
 
                 runOnUiThread(new Runnable() {

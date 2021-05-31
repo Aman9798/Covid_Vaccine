@@ -1,5 +1,6 @@
 package com.example.android.covid19;
 
+import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -23,7 +24,9 @@ public class QueryUtils {
     public static final String LOG_TAG = IndiaCases.class.getName();
     public static List<StatesModel> stateModelsList1 = new ArrayList<>();
     public static StatesModel statesModel1;
-
+    public static VaccineModel vaccineModel1;
+    public static String URL_STATE_ID="https://cdn-api.co-vin.in/api/v2/admin/location/states";
+    public static String URL_District="https://cdn-api.co-vin.in/api/v2/admin/location/districts/";
     private QueryUtils() {
     }
 
@@ -204,25 +207,7 @@ public class QueryUtils {
                 statesModel1 = new StatesModel(name, totalCases, newCases, deaths, newDeaths, recovered, newRecovered, active);
                 stateModelsList1.add(statesModel1);
             }
-//            String cases = JsonResponse.getString("totalCases");
-//            String recovered = JsonResponse.getString("recovered");
-//            String previousDayTests = JsonResponse.getString("previousDayTests");
-//            String active = JsonResponse.getString("activeCases");
-//            String todayCases = JsonResponse.getString("activeCasesNew");
-//            String deaths = JsonResponse.getString("deaths");
-//            String todayDeaths = JsonResponse.getString("deathsNew");
-//            //  String affectedCountries = JsonResponse.getString("affectedCountries");
-//            String todayRecovered  = JsonResponse.getString("recoveredNew");
-//
-//            StateCases.add(cases);
-//            StateCases.add(recovered);
-//            StateCases.add(previousDayTests);
-//            StateCases.add(active);
-//            StateCases.add(todayCases);
-//            StateCases.add(deaths);
-//            StateCases.add(todayDeaths);
-//            //   WorldCases.add(affectedCountries);
-//            StateCases.add(todayRecovered);
+
 
         } catch (JSONException e) {
             // If an error is thrown when executing any of the above statements in the "try" block,
@@ -255,5 +240,155 @@ public class QueryUtils {
     }
 
 
+    public static ArrayList<ArrayList<VaccineModel> > extractSlotsFromPin(String SlotAvailableJson) {
+
+        if(TextUtils.isEmpty(SlotAvailableJson)){
+            return null;
+        }
+
+        ArrayList<ArrayList<VaccineModel>> VaccineDataList
+                = new ArrayList<ArrayList<VaccineModel>>();
+
+
+        try {
+
+
+            JSONObject JsonResponse = new JSONObject(SlotAvailableJson);
+            JSONArray CentreArray = JsonResponse.getJSONArray("centers");
+            JSONObject centreVal;
+            JSONArray SessionArray;
+            String centreName, address, date, age, type, dose1, dose2;
+
+            for(int i=0;i<CentreArray.length();i++){
+                VaccineDataList.add(new ArrayList<VaccineModel>());
+                centreVal = CentreArray.getJSONObject(i);
+
+                centreName = centreVal.getString("name");
+                address = centreVal.getString("address");
+
+                SessionArray = centreVal.getJSONArray("sessions");
+                JSONObject SessionVal;
+
+                for(int j=0;j<SessionArray.length();j++){
+                    SessionVal = SessionArray.getJSONObject(j);
+
+                    date = SessionVal.getString("date");
+                    age = SessionVal.getString("min_age_limit");
+                    type = SessionVal.getString("vaccine");
+                    dose1 = SessionVal.getString("available_capacity_dose1");
+                    dose2 = SessionVal.getString("available_capacity_dose2");
+
+                    vaccineModel1 = new VaccineModel(centreName, address, date, dose1, dose2,age, type);
+                    VaccineDataList.get(i).add(j,vaccineModel1);
+                }
+
+            }
+
+        } catch (JSONException e) {
+
+            Log.e("QueryUtils", "Problem parsing the earthquake JSON results", e);
+        }
+
+        return VaccineDataList;
+    }
+
+    public static ArrayList<ArrayList<VaccineModel>> fetchSlotsFromPin(String requestUrl, String DDate, String Pin){
+        // Create URL object
+
+        Uri baseUri = Uri.parse(requestUrl);
+        Uri.Builder uriBuilder = baseUri.buildUpon();
+        uriBuilder.appendQueryParameter("pincode", Pin);
+        uriBuilder.appendQueryParameter("date", DDate);
+        String URL_PIN2 = uriBuilder.toString();
+        URL url = createUrl(URL_PIN2);
+        String jsonResponse = null;
+        try{
+            jsonResponse = makeHttpRequest(url);
+        }catch(IOException e){
+            Log.e(LOG_TAG, "Problem making the HTTP request", e);
+        }
+
+        ArrayList<ArrayList<VaccineModel>> VaccineData = extractSlotsFromPin(jsonResponse);
+        String x = String.valueOf(VaccineData.size());
+
+        Log.e(LOG_TAG, "Size="+x);
+        return VaccineData;
+    }
+
+    public static ArrayList<String> extractDistrictIdFormJson(String DistrictIdJson) {
+
+        if(TextUtils.isEmpty(DistrictIdJson)){
+            return null;
+        }
+
+
+        ArrayList<String> DistrictId = new ArrayList<String>();
+
+        try {
+
+
+            JSONObject JsonResponse = new JSONObject(DistrictIdJson);
+            JSONArray DistrictArray = JsonResponse.getJSONArray("districts");
+            JSONObject DistrictVal;
+
+            String Dis_Name, Dis_Id;
+
+            for(int i=0;i<DistrictArray.length();i++){
+               // VaccineDataList.add(new ArrayList<VaccineModel>());
+                DistrictVal = DistrictArray.getJSONObject(i);
+
+                Dis_Name = DistrictVal.getString("district_name");
+                Dis_Id = DistrictVal.getString("district_id");
+
+                DistrictId.add(Dis_Name+"/"+Dis_Id);
+
+            }
+
+        } catch (JSONException e) {
+
+            Log.e("QueryUtils", "Problem parsing the earthquake JSON results", e);
+        }
+
+        return DistrictId;
+    }
+
+    public static ArrayList<String> fetchDistrictID(int Id){
+        // Create URL object
+        String District_Url = URL_District+Id;
+        URL url = createUrl(District_Url);
+        String jsonResponse = null;
+        try{
+            jsonResponse = makeHttpRequest(url);
+        }catch(IOException e){
+            Log.e(LOG_TAG, "Problem making the HTTP request", e);
+        }
+
+        ArrayList<String> District_Id_data = extractDistrictIdFormJson(jsonResponse);
+
+        return District_Id_data;
+    }
+
+    public static ArrayList<ArrayList<VaccineModel>> fetchSlotsFromDistrict(String requestUrl, String DDate, String Id){
+        // Create URL object
+        Uri baseUri = Uri.parse(requestUrl);
+        Uri.Builder uriBuilder = baseUri.buildUpon();
+        uriBuilder.appendQueryParameter("district_id", Id);
+        uriBuilder.appendQueryParameter("date", DDate);
+        String URL_PIN2 = uriBuilder.toString();
+        URL url = createUrl(URL_PIN2);
+        Log.e(LOG_TAG, URL_PIN2);
+        String jsonResponse = null;
+        try{
+            jsonResponse = makeHttpRequest(url);
+        }catch(IOException e){
+            Log.e(LOG_TAG, "Problem making the HTTP request", e);
+        }
+
+        ArrayList<ArrayList<VaccineModel>> District_Id_data = extractSlotsFromPin(jsonResponse);
+        String x = String.valueOf(District_Id_data.size());
+
+        Log.e(LOG_TAG, "Size="+x);
+        return District_Id_data;
+    }
 
 }
