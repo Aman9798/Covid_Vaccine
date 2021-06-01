@@ -169,9 +169,6 @@ public class Vaccine extends AppCompatActivity  {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-//                                ArrayList<String> Dis_Name = new ArrayList<String>();
-//                                ArrayList<String> Dis_id = new ArrayList<String>();
-
                                 Dis_Name.clear();
                                 Dis_id.clear();
                                 for (int i = 0; i < DistrictId.size(); i++) {
@@ -188,32 +185,7 @@ public class Vaccine extends AppCompatActivity  {
                                     @Override
                                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                                        // String dis_id = parent.getItemAtPosition(position).toString();
-
                                         dis_id11 = Dis_id.get(position);
-//                                        SimpleDateFormat df1 = new SimpleDateFormat("dd-MM-yyyy");
-//                                        String date2 = df1.format(Calendar.getInstance().getTime());
-//                                        Toast toast = Toast.makeText(parent.getContext(), dis_id11, Toast.LENGTH_LONG);
-//                                        toast.setGravity(Gravity.CENTER, 0, 0);
-//                                        toast.show();
-//                                        VaccineList_Dis.clear();
-//                                        executorservice3.execute(new Runnable() {
-//                                            @Override
-//                                            public void run() {
-//                                                //background
-//
-//                                                VaccineList_Dis = QueryUtils.fetchSlotsFromDistrict(URL_DIS, date2, dis_id11);
-//
-//                                                runOnUiThread(new Runnable() {
-//                                                    @Override
-//                                                    public void run() {
-//                                                        Toast toast = Toast.makeText(Vaccine.this, VaccineList_Dis.size(), Toast.LENGTH_LONG);
-//                                                        toast.setGravity(Gravity.CENTER, 0, 0);
-//                                                        toast.show();
-//                                                    }
-//                                                });
-//                                            }
-//                                        });
                                     }
 
                                     @Override
@@ -228,52 +200,6 @@ public class Vaccine extends AppCompatActivity  {
                         });
                     }
                 });
-//
-//                Toast toast = Toast.makeText(Vaccine.this, DistrictId.size(), Toast.LENGTH_LONG);
-//                toast.setGravity(Gravity.CENTER, 0, 0);
-//                toast.show();
-
-//
-//                ArrayAdapter<String> adapter2 = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, Dis_Name);
-//                adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                spinner_district.setAdapter(adapter2);
-//                spinner_district.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//                    @Override
-//                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//
-//                        // String dis_id = parent.getItemAtPosition(position).toString();
-//
-//                        dis_id11 = Dis_id.get(position);
-//                        SimpleDateFormat df1 = new SimpleDateFormat("dd-MM-yyyy");
-//                        String date2 = df1.format(Calendar.getInstance().getTime());
-//                        Toast toast = Toast.makeText(parent.getContext(), dis_id11, Toast.LENGTH_LONG);
-//                        toast.setGravity(Gravity.CENTER, 0, 0);
-//                        toast.show();
-//                        VaccineList_Dis.clear();
-//                        executorservice3.execute(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                //background
-//
-//                                VaccineList_Dis = QueryUtils.fetchSlotsFromDistrict(URL_DIS, date2, dis_id11);
-//
-//                                runOnUiThread(new Runnable() {
-//                                    @Override
-//                                    public void run() {
-//                                        Toast toast = Toast.makeText(Vaccine.this, VaccineList_Dis.size(), Toast.LENGTH_LONG);
-//                                        toast.setGravity(Gravity.CENTER, 0, 0);
-//                                        toast.show();
-//                                    }
-//                                });
-//                            }
-//                        });
-//                    }
-//
-//                    @Override
-//                    public void onNothingSelected(AdapterView<?> parent) {
-//                        dis_id11 = null;
-//                    }
-//                });
 
             }
 
@@ -331,45 +257,6 @@ public class Vaccine extends AppCompatActivity  {
         state_lay.setVisibility(View.VISIBLE);
     }
 
-
-//
-//    @Override
-//    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//        String State = parent.getItemAtPosition(position).toString();
-//        if(position<=7){
-//            position++;
-//        }else if(position==8){
-//            position=37;
-//        }
-//        Toast toast = Toast.makeText(parent.getContext(), State+position, Toast.LENGTH_LONG);
-//        toast.setGravity(Gravity.CENTER, 0, 0);
-//        toast.show();
-//    }
-//
-//    @Override
-//    public void onNothingSelected(AdapterView<?> parent) {
-//
-//    }
-
-
-//    public void Search1(View view){
-//        EditText edittext = (EditText) findViewById(R.id.pin_edit);
-//        String pin =  edittext.getText().toString();
-////        Toast toast = Toast.makeText(this, pin, Toast.LENGTH_LONG);
-////        toast.setGravity(Gravity.CENTER, 0, 0);
-////        toast.show();
-//        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-//        String date = df.format(Calendar.getInstance().getTime());
-//        Uri baseUri = Uri.parse(URL_PIN);
-//        Uri.Builder uriBuilder = baseUri.buildUpon();
-//        uriBuilder.appendQueryParameter("pincode", pin);
-//        uriBuilder.appendQueryParameter("date", date);
-//
-//        URL_PIN1 = uriBuilder.toString();
-//        Toast toast = Toast.makeText(this, URL_PIN1, Toast.LENGTH_LONG);
-//        toast.setGravity(Gravity.CENTER, 0, 0);
-//        toast.show();
-//    }
     public String Dates() throws ParseException{
 
         mDate_1 = (TextView) findViewById(R.id.Date1);

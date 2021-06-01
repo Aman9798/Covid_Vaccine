@@ -96,7 +96,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="Date"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:layout_margin="3dp"
+            android:background="@drawable/rounded_corner_view"/>
 
         <TextView
             android:id="@+id/Date2"
@@ -104,7 +106,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="Date"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:layout_margin="3dp"
+            android:background="@drawable/rounded_corner_view"/>
 
         <TextView
             android:id="@+id/Date3"
@@ -112,21 +116,28 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="Date"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:layout_margin="3dp"
+            android:background="@drawable/rounded_corner_view"/>
         <TextView
             android:id="@+id/Date4"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="Date"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:layout_margin="3dp"
+            android:background="@drawable/rounded_corner_view"/>
         <TextView
             android:id="@+id/Date5"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="Date"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:layout_margin="3dp"
+            android:background="@drawable/rounded_corner_view"
+            />
     </LinearLayout>
 
     <ListView

@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
 
@@ -61,13 +62,20 @@ public class VaccineAdapter extends ArrayAdapter<ArrayList<VaccineModel>> {
         TextView mSlot_age_4 = (TextView) listItemView.findViewById(R.id.slot_age_4);
         TextView mSlot_age_5 = (TextView) listItemView.findViewById(R.id.slot_age_5);
 
-//        TextView mDate_1 = (TextView) listItemView.findViewById(R.id.Date1);
-//        TextView mDate_2 = (TextView) listItemView.findViewById(R.id.Date2);
-//        TextView mDate_3 = (TextView) listItemView.findViewById(R.id.Date3);
-//        TextView mDate_4 = (TextView) listItemView.findViewById(R.id.Date4);
-//        TextView mDate_5 = (TextView) listItemView.findViewById(R.id.Date5);
-        //Log.e(LOG_TAG, "Size="+D1);
-        //Log.e(LOG_TAG, "Size="+currentVaccineModel.get(0).getDate());
+        TextView mSlot_data_1_dose_1 = (TextView) listItemView.findViewById(R.id.slot_data_1_dose_1);
+        TextView mSlot_data_2_dose_1 = (TextView) listItemView.findViewById(R.id.slot_data_2_dose_1);
+        TextView mSlot_data_3_dose_1 = (TextView) listItemView.findViewById(R.id.slot_data_3_dose_1);
+        TextView mSlot_data_4_dose_1 = (TextView) listItemView.findViewById(R.id.slot_data_4_dose_1);
+        TextView mSlot_data_5_dose_1 = (TextView) listItemView.findViewById(R.id.slot_data_5_dose_1);
+
+        TextView mSlot_data_1_dose_2 = (TextView) listItemView.findViewById(R.id.slot_data_1_dose_2);
+        TextView mSlot_data_2_dose_2 = (TextView) listItemView.findViewById(R.id.slot_data_2_dose_2);
+        TextView mSlot_data_3_dose_2 = (TextView) listItemView.findViewById(R.id.slot_data_3_dose_2);
+        TextView mSlot_data_4_dose_2 = (TextView) listItemView.findViewById(R.id.slot_data_4_dose_2);
+        TextView mSlot_data_5_dose_2 = (TextView) listItemView.findViewById(R.id.slot_data_5_dose_2);
+
+
+
         mCentre_Address.setText(currentVaccineModel.get(0).getCentre_name());
         //Log.e(LOG_TAG, String.valueOf(currentVaccineModel.size()));
         String Dt, Ds1, Ds2;
@@ -79,7 +87,18 @@ public class VaccineAdapter extends ArrayAdapter<ArrayList<VaccineModel>> {
                 Ds1 = currentVaccineModel.get(i).getDose1();
                 Ds2 = currentVaccineModel.get(i).getDose2();
                 x = Integer.valueOf(Ds1) + Integer.valueOf(Ds2);
-                mSlot_data_1.setText(String.valueOf(x));
+                if(x==0){
+                    mSlot_data_1.setText("Booked");
+                    mSlot_data_1.setBackgroundColor(ContextCompat.getColor(getContext() , R.color.red));
+                }else{
+                    mSlot_data_1.setText(String.valueOf(x));
+                    mSlot_data_1.setBackgroundColor(ContextCompat.getColor(getContext() , R.color.green));
+                }
+                if(x<30 && x!=0){
+                    mSlot_data_1.setBackgroundColor(ContextCompat.getColor(getContext() , R.color.orange));
+                }
+                mSlot_data_1_dose_1.setText(Ds1);
+                mSlot_data_1_dose_2.setText(Ds2);
                 mSlot_type_1.setText(currentVaccineModel.get(i).getType());
                 mSlot_age_1.setText(currentVaccineModel.get(i).getAge()+"+");
                 //Log.e(LOG_TAG, "Hey");
@@ -87,7 +106,18 @@ public class VaccineAdapter extends ArrayAdapter<ArrayList<VaccineModel>> {
                 Ds1 = currentVaccineModel.get(i).getDose1();
                 Ds2 = currentVaccineModel.get(i).getDose2();
                 x = Integer.valueOf(Ds1) + Integer.valueOf(Ds2);
-                mSlot_data_2.setText(String.valueOf(x));
+                if(x==0){
+                    mSlot_data_2.setText("Booked");
+                    mSlot_data_2.setBackgroundColor(ContextCompat.getColor(getContext() , R.color.red));
+                }else{
+                    mSlot_data_2.setText(String.valueOf(x));
+                    mSlot_data_2.setBackgroundColor(ContextCompat.getColor(getContext() , R.color.green));
+                }
+                if(x<30 && x!=0){
+                    mSlot_data_2.setBackgroundColor(ContextCompat.getColor(getContext() , R.color.orange));
+                }
+                mSlot_data_2_dose_1.setText(Ds1);
+                mSlot_data_2_dose_2.setText(Ds2);
                 mSlot_type_2.setText(currentVaccineModel.get(i).getType());
                 mSlot_age_2.setText(currentVaccineModel.get(i).getAge()+"+");
                 //Log.e(LOG_TAG, "Hey");
@@ -95,7 +125,18 @@ public class VaccineAdapter extends ArrayAdapter<ArrayList<VaccineModel>> {
                 Ds1 = currentVaccineModel.get(i).getDose1();
                 Ds2 = currentVaccineModel.get(i).getDose2();
                 x = Integer.valueOf(Ds1) + Integer.valueOf(Ds2);
-                mSlot_data_3.setText(String.valueOf(x));
+                if(x==0){
+                    mSlot_data_3.setText("Booked");
+                    mSlot_data_3.setBackgroundColor(ContextCompat.getColor(getContext() , R.color.red));
+                }else{
+                    mSlot_data_3.setText(String.valueOf(x));
+                    mSlot_data_3.setBackgroundColor(ContextCompat.getColor(getContext() , R.color.green));
+                }
+                if(x<30 && x!=0){
+                    mSlot_data_3.setBackgroundColor(ContextCompat.getColor(getContext() , R.color.orange));
+                }
+                mSlot_data_3_dose_1.setText(Ds1);
+                mSlot_data_3_dose_2.setText(Ds2);
                 mSlot_type_3.setText(currentVaccineModel.get(i).getType());
                 mSlot_age_3.setText(currentVaccineModel.get(i).getAge()+"+");
                 //Log.e(LOG_TAG, "Hey");
@@ -103,7 +144,18 @@ public class VaccineAdapter extends ArrayAdapter<ArrayList<VaccineModel>> {
                 Ds1 = currentVaccineModel.get(i).getDose1();
                 Ds2 = currentVaccineModel.get(i).getDose2();
                 x = Integer.valueOf(Ds1) + Integer.valueOf(Ds2);
-                mSlot_data_4.setText(String.valueOf(x));
+                if(x==0){
+                    mSlot_data_4.setText("Booked");
+                    mSlot_data_4.setBackgroundColor(ContextCompat.getColor(getContext() , R.color.red));
+                }else{
+                    mSlot_data_4.setText(String.valueOf(x));
+                    mSlot_data_4.setBackgroundColor(ContextCompat.getColor(getContext() , R.color.green));
+                }
+                if(x<30 && x!=0){
+                    mSlot_data_4.setBackgroundColor(ContextCompat.getColor(getContext() , R.color.orange));
+                }
+                mSlot_data_4_dose_1.setText(Ds1);
+                mSlot_data_4_dose_2.setText(Ds2);
                 mSlot_type_4.setText(currentVaccineModel.get(i).getType());
                 mSlot_age_4.setText(currentVaccineModel.get(i).getAge()+"+");
                 //Log.e(LOG_TAG, "Hey");
@@ -111,7 +163,18 @@ public class VaccineAdapter extends ArrayAdapter<ArrayList<VaccineModel>> {
                 Ds1 = currentVaccineModel.get(i).getDose1();
                 Ds2 = currentVaccineModel.get(i).getDose2();
                 x = Integer.valueOf(Ds1) + Integer.valueOf(Ds2);
-                mSlot_data_5.setText(String.valueOf(x));
+                if(x==0){
+                    mSlot_data_5.setText("Booked");
+                    mSlot_data_4.setBackgroundColor(ContextCompat.getColor(getContext() , R.color.red));
+                }else{
+                    mSlot_data_5.setText(String.valueOf(x));
+                    mSlot_data_4.setBackgroundColor(ContextCompat.getColor(getContext() , R.color.green));
+                }
+                if(x<30 && x!=0){
+                    mSlot_data_4.setBackgroundColor(ContextCompat.getColor(getContext() , R.color.orange));
+                }
+                mSlot_data_4_dose_1.setText(Ds1);
+                mSlot_data_4_dose_2.setText(Ds2);
                 mSlot_type_5.setText(currentVaccineModel.get(i).getType());
                 mSlot_age_5.setText(currentVaccineModel.get(i).getAge()+"+");
                 //Log.e(LOG_TAG, "Hey");
